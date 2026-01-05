@@ -1,0 +1,117 @@
+{
+    "name": "pascallint",
+    "displayName": "PascalLint",
+    "description": "A modern static analysis tool for Delphi/Object Pascal, powered by Tree-sitter",
+    "version": "0.2.0",
+    "publisher": "pascallint",
+    "license": "MIT",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/SeasForest/PascalLint"
+    },
+    "engines": {
+        "vscode": "^1.85.0",
+        "node": ">=18.0.0"
+    },
+    "categories": [
+        "Linters",
+        "Programming Languages"
+    ],
+    "keywords": [
+        "delphi",
+        "pascal",
+        "object-pascal",
+        "linter",
+        "static-analysis"
+    ],
+    "activationEvents": [
+        "onLanguage:pascal",
+        "onLanguage:objectpascal",
+        "workspaceContains:**/*.pas",
+        "workspaceContains:**/*.dpr"
+    ],
+    "main": "./out/extension.js",
+    "bin": {
+        "pslint": "./out/cli/index.js"
+    },
+    "contributes": {
+        "commands": [
+            {
+                "command": "pascallint.lint",
+                "title": "PascalLint: Lint Current File"
+            },
+            {
+                "command": "pascallint.fix",
+                "title": "PascalLint: Fix All Issues"
+            }
+        ],
+        "configuration": {
+            "title": "PascalLint",
+            "properties": {
+                "pascallint.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable/disable PascalLint"
+                },
+                "pascallint.configPath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Path to custom config file"
+                },
+                "pascallint.fixOnSave": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Auto-fix on save"
+                }
+            }
+        },
+        "languages": [
+            {
+                "id": "pascal",
+                "extensions": [
+                    ".pas",
+                    ".pp",
+                    ".dpr",
+                    ".dpk",
+                    ".lpr"
+                ]
+            }
+        ]
+    },
+    "scripts": {
+        "vscode:prepublish": "npm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "lint": "eslint src --ext ts",
+        "lint:fix": "eslint src --ext ts --fix",
+        "format": "prettier --write \"src/**/*.ts\"",
+        "test": "jest",
+        "test:watch": "jest --watch",
+        "test:integration": "node ./out/test/runTest.js",
+        "test:perf": "jest --config jest.perf.config.js",
+        "pretest": "npm run compile",
+        "package": "vsce package",
+        "publish": "vsce publish"
+    },
+    "devDependencies": {
+        "@types/jest": "^29.5.11",
+        "@types/node": "^20.10.6",
+        "@types/vscode": "^1.85.0",
+        "@typescript-eslint/eslint-plugin": "^6.16.0",
+        "@typescript-eslint/parser": "^6.16.0",
+        "@vscode/test-electron": "^2.3.8",
+        "@vscode/vsce": "^2.22.0",
+        "eslint": "^8.56.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-prettier": "^5.1.2",
+        "jest": "^29.7.0",
+        "prettier": "^3.1.1",
+        "ts-jest": "^29.1.1",
+        "typescript": "^5.3.3"
+    },
+    "dependencies": {
+        "commander": "^11.1.0",
+        "glob": "^10.3.10",
+        "web-tree-sitter": "^0.20.8"
+    }
+}

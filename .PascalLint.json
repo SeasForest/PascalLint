@@ -1,0 +1,19 @@
+{
+    "rules": {
+        "no-with": "error",
+        "empty-begin-end": "warn",
+        "no-semicolon-before-else": "error",
+        "dangling-semicolon": "error",
+        "use-free-and-nil": "warn",
+        "no-empty-finally": "warn",
+        "pascal-case": "warn",
+        "one-var-per-line": "info"
+    },
+    "parserOptions": {
+        "delphiVersion": "xe"
+    },
+    "ignorePatterns": [
+        "**/node_modules/**",
+        "**/out/**"
+    ]
+}
