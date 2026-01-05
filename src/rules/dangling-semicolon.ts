@@ -18,13 +18,13 @@ export const danglingSemicolonRule: LintRule = {
     defaultSeverity: 'error',
     create(context: RuleContext): RuleListener {
         return {
-            if_statement(node: TreeSitterNode) {
+            if(node: TreeSitterNode) {
                 checkDanglingSemicolon(node, context, 'if');
             },
-            while_statement(node: TreeSitterNode) {
+            while(node: TreeSitterNode) {
                 checkDanglingSemicolon(node, context, 'while');
             },
-            for_statement(node: TreeSitterNode) {
+            for(node: TreeSitterNode) {
                 checkDanglingSemicolon(node, context, 'for');
             },
         };

@@ -1,0 +1,33 @@
+# VSCode ignore file for packaging
+
+# Source files
+src/**
+test/**
+parsers/README.md
+
+# Build artifacts
+tsconfig.json
+eslint.json
+.prettierrc
+.eslintrc.json
+
+# Development files
+.vscode/**
+.gitignore
+.github/**
+CLAUDE.md
+技术路线.md
+docs/**
+
+# Node modules
+
+
+
+# Test files
+jest.config.js
+*.test.ts
+**/*.test.ts
+
+# Misc
+*.vsix
+.DS_Store

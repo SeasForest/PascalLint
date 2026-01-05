@@ -83,7 +83,7 @@ procedure TestNoSemicolonBeforeElse;
 var
   x: Integer;
 begin
-  x := 10;
+  x := 10; 
   
   // Incorrect - semicolon before else
   if x > 5 then

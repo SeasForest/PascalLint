@@ -9,10 +9,10 @@ export const camelCaseRule: LintRule = {
     meta: {
         description: 'Enforce camelCase naming for local variables and parameters',
         category: 'style',
-        fixable: false,
+        fixable: true,
         docs: {
             description:
-                'Local variables and parameters should follow camelCase convention (e.g., myVariable, inputValue).',
+                'Local variables and parameters should follow camelCase convention (e.g., myVariable, inputValue). Note: Auto-fix only changes the declaration.',
         },
     },
     defaultSeverity: 'info',
@@ -70,6 +70,19 @@ function checkCamelCaseName(
             return; // Skip constants
         }
 
+        // Convert to camelCase
+        let fixedName = name.charAt(0).toLowerCase() + name.slice(1);
+
+        // Handle snake_case -> camelCase
+        if (name.includes('_')) {
+            fixedName = name.split('_')
+                .map((part, index) => {
+                    if (index === 0) return part.toLowerCase();
+                    return part.charAt(0).toUpperCase() + part.slice(1).toLowerCase();
+                })
+                .join('');
+        }
+
         context.report({
             message: `${kind} '${name}' should use camelCase naming convention.`,
             range: {
@@ -84,6 +97,21 @@ function checkCamelCaseName(
                     offset: node.endIndex,
                 },
             },
+            fix: {
+                range: {
+                    start: {
+                        line: node.startPosition.row,
+                        column: node.startPosition.column,
+                        offset: node.startIndex,
+                    },
+                    end: {
+                        line: node.endPosition.row,
+                        column: node.endPosition.column,
+                        offset: node.endIndex,
+                    },
+                },
+                text: fixedName
+            }
         });
     }
 }

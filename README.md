@@ -39,24 +39,35 @@ node ./out/cli/index.js --format json your-file.pas
 
 ---
 
-## 🎯 支持的规则 (14 条)
+## Supported Rules
 
-| 规则 | 类型 | 可修复 | 描述 |
-|:---|:---:|:---:|:---|
-| `no-with` | Error | ❌ | 禁止 `with` 语句 |
-| `no-semicolon-before-else` | Error | ✅ | `else` 前不能有分号 |
-| `dangling-semicolon` | Error | ✅ | 检测意外的空语句 |
-| `no-empty-finally` | Warn | ❌ | 禁止空 `finally` 块 |
-| `unreachable-code` | Error | ❌ | 检测死代码 |
-| `constructor-call-on-instance` | Error | ❌ | 禁止实例调用 Create |
-| `no-exit-in-finally` | Error | ❌ | finally 中禁止 exit |
-| `empty-begin-end` | Warn | ✅ | 检测空代码块 |
-| `use-free-and-nil` | Warn | ✅ | 建议用 FreeAndNil |
-| `check-assigned` | Info | ❌ | 建议检查 Assigned |
-| `pascal-case` | Warn | ❌ | 类名 PascalCase |
-| `camel-case` | Off | ❌ | 变量 camelCase |
-| `one-var-per-line` | Info | ❌ | 单行单变量 |
-| `upper-case-keywords` | Off | ✅ | 关键字大小写 |
+Currently, **12 rules** are supported, categorized by type:
+
+### Potential Errors
+| Rule ID | Description | Auto-Fix |
+| :--- | :--- | :---: |
+| `no-with` | Disallow `with` statements to avoid scope confusion | ❌ |
+| `dangling-semicolon` | Detect unexpected semicolons after `if`/`while`/`for` | ✅ |
+| `no-empty-finally` | Disallow empty `finally` blocks | ✅ |
+| `unreachable-code` | Detect code that can never be executed | ✅ |
+| `no-exit-in-finally` | Disallow `Exit` / `Raise` in `finally` blocks | ✅ |
+
+### Best Practices
+| Rule ID | Description | Auto-Fix |
+| :--- | :--- | :---: |
+| `empty-begin-end` | Detect empty `begin...end` blocks | ✅ |
+| `use-free-and-nil` | Suggest `FreeAndNil(Obj)` instead of `Obj.Free` | ✅ |
+| `check-assigned` | Suggest `Assigned(Obj)` check before freeing | ✅ |
+
+### Stylistic Issues
+| Rule ID | Description | Auto-Fix |
+| :--- | :--- | :---: |
+| `pascal-case` | Enforce PascalCase for class/method names | ✅* |
+| `one-var-per-line` | Enforce one variable declaration per line | ✅ |
+| `camel-case` | Enforce camelCase for variables/parameters | ✅* |
+| `upper-case-keywords` | Enforce consistent keyword casing | ✅ |
+
+> **Note**: Auto-fixes for naming conventions (`pascal-case`, `camel-case`) only rename the declaration. You may need to manually update references or use the IDE's rename refactoring tool.
 
 ---
 

@@ -9,7 +9,7 @@ export const noExitInFinallyRule: LintRule = {
     meta: {
         description: 'Disallow exit, raise, or break in finally blocks',
         category: 'error',
-        fixable: false,
+        fixable: true,
         docs: {
             description:
                 'Using exit, raise, or break in finally blocks can cause unexpected behavior and hide exceptions.',
@@ -45,6 +45,21 @@ export const noExitInFinallyRule: LintRule = {
                                 offset: node.endIndex,
                             },
                         },
+                        fix: {
+                            range: {
+                                start: {
+                                    line: node.startPosition.row,
+                                    column: node.startPosition.column,
+                                    offset: node.startIndex,
+                                },
+                                end: {
+                                    line: node.endPosition.row,
+                                    column: node.endPosition.column,
+                                    offset: node.endIndex,
+                                },
+                            },
+                            text: `{ Error: Exit in finally }`
+                        }
                     });
                 }
             },
